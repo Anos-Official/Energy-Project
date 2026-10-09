@@ -1,0 +1,78 @@
+#persona {
+    --u: clamp(44px, min(8vw, 12vh), 110px);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
+    transition:
+        opacity 0.2s,
+        left 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
+        top 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#persona.spawned { opacity: 1; }
+
+#persona[data-pos="corner"] { left: 85%; top: 72%; }
+#persona[data-pos="center"] { left: 50%; top: 55%; }
+#persona[data-pos="left"]   { left: 15%; top: 72%; }
+#persona[data-pos="off"]    { left: 135%; top: 72%; }
+
+#character {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#character.drop  { animation: drop 1s ease-out; }
+#character.hop   { animation: hop 0.6s ease-out; }
+#character.shake { animation: shake 0.5s ease-in-out; }
+
+#face {
+    width: calc(var(--u) * 1.5);
+    height: var(--u);
+    object-fit: cover;
+    border-radius: 14px;
+    border: 3px solid #E9E9EE;
+    display: block;
+}
+
+#body {
+    display: block;
+    width: var(--u);
+    height: auto;
+    margin-top: -2px;
+}
+
+#arm-r { transform-origin: 50px 20px; }
+#arm-r.wave { animation: wave 0.5s ease-in-out 3; }
+
+/* Arrow pointing at Gregory */
+#arrow {
+    position: absolute;
+    right: calc(100% + 8px);
+    top: calc(var(--u) / 2);
+    transform: translateY(-50%);
+    width: calc(var(--u) * 3.4);
+    height: calc(var(--u) * 1.6);
+    box-sizing: border-box;
+    padding-right: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFD23F;
+    color: #0A0A0D;
+    font-weight: 700;
+    font-size: calc(var(--u) * 0.4);
+    clip-path: polygon(0 25%, 65% 25%, 65% 0, 100% 50%, 65% 100%, 65% 75%, 0 75%);
+    opacity: 0;
+}
+
+#arrow.show {
+    animation:
+        arrow-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both,
+        nudge 0.7s ease-in-out 0.6s infinite alternate;
+}

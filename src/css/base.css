@@ -1,0 +1,13 @@
+body {
+    margin: 0;
+    background: #0a0a0d;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.hidden {
+    display: none;
+}
+
+.step.hidden {
+    display: none;
+}

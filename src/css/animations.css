@@ -1,0 +1,60 @@
+@keyframes rise-in {
+    0%   { transform: translateY(100vh); }
+    70%  { transform: translateY(-20px); }
+    85%  { transform: translateY(8px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fade-out {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+@keyframes flash {
+    0%   { opacity: 0; }
+    12%  { opacity: 1; }
+    35%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes drop {
+    0%   { transform: translateY(-100vh); }
+    70%  { transform: translateY(18px); }
+    85%  { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes hop {
+    0%   { transform: translateY(0); }
+    40%  { transform: translateY(-24px); }
+    70%  { transform: translateY(4px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%  { transform: translateX(-10px); }
+    40%  { transform: translateX(10px); }
+    60%  { transform: translateX(-8px); }
+    80%  { transform: translateX(8px); }
+}
+
+@keyframes wave {
+    0%, 100% { transform: rotate(0deg); }
+    50%      { transform: rotate(-70deg); }
+}
+
+@keyframes arrow-in {
+    from { opacity: 0; transform: translate(-80px, -50%); }
+    to   { opacity: 1; transform: translate(0, -50%); }
+}
+
+@keyframes nudge {
+    from { translate: 0 0; }
+    to   { translate: 12px 0; }
+}

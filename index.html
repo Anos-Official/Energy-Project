@@ -8,26 +8,81 @@
   </head>
   <body>
     <main id="landing">
-        <button id="present" type="button"> Present </button>
-        <button id="connect" type="button"> Connect </button>
+      <button id="present" type="button">Present</button>
+      <button id="connect" type="button">Connect</button>
     </main>
 
     <section id="presentation" class="hidden">
-        <div id="poster">
-            <img src="/src/assets/Energy Poster.png" alt = "Energy Poster" />
-        </div>
-        
-        <div id="visuals">
-            <div class="step title-block">
-                <h1 style="--i: 0">Magnetic &amp; Electrostatic</h1>
-                <h2 style="--i: 1">Super capacitors</h2>
-                <p style="--i: 2">Fast charging static &amp; Electromagnetic Fields</p>
-            </div>
+      <div id="poster">
+        <img src="/poster.png" alt="Energy Poster" />
+      </div>
 
-            <div class= "step hidden"> Step 2 </div>
-            <div class= "step hidden"> Step 3 </div>
+      <div id="visuals">
+        <!-- The 3D cube lives on its own layer so it can slide on/off screen between steps.
+             data-cube is driven by src/model.ts: hidden | center | off -->
+        <div id="model" data-cube="hidden"></div>
+
+        <!-- Step 0: title -->
+        <div class="step">
+          <div class="title-block">
+            <h1 style="--i: 0">Magnetic &amp; Electrostatic</h1>
+            <h2 style="--i: 1">Super capacitors</h2>
+            <p style="--i: 2">Fast charging static &amp; Electromagnetic Fields</p>
+          </div>
         </div>
-        
+
+        <!-- Step 1: big camera picture (the next click plays the white flash) -->
+        <div class="step hidden camera-step" data-transition="flash">
+          <img class="camera" src="/camera.svg" alt="Camera" />
+        </div>
+
+        <!-- Step 2: rotating cube (empty step, the cube is on the #model layer) -->
+        <div class="step hidden" data-transition="instant"></div>
+
+        <!-- Step 3: persona pushes the cube off screen, then the title rises in -->
+        <div class="step hidden electro-step" data-transition="pan">
+          <h1 style="--i: 5">Electrostatic</h1>
+        </div>
+
+        <!-- Step 4: pan to the lightning picture (TBD) -->
+        <div class="step hidden picture-step">
+          <img class="lightning" src="/lightning.svg" alt="Lightning" />
+        </div>
+
+        <!-- Step 5: persona brings the cube back (empty step, cube is on the #model layer) -->
+        <div class="step hidden" data-transition="instant"></div>
+
+        <!-- Step 6: two pictures compared (TBD) -->
+        <div class="step hidden compare-step">
+          <img src="/compare-a.svg" alt="Picture A" />
+          <span class="vs">VS</span>
+          <img src="/compare-b.svg" alt="Picture B" />
+        </div>
+
+        <!-- Step 7: thank you -->
+        <div class="step hidden thanks-step">
+          <h1 style="--i: 0">Thank you</h1>
+        </div>
+
+        <div id="persona" data-pos="center">
+          <div id="arrow"><span>Gregory</span></div>
+          <div id="character">
+            <img id="face" src="/face.png" alt="" />
+            <svg id="body" viewBox="0 0 100 140">
+              <g stroke="#E9E9EE" stroke-width="5" stroke-linecap="round" fill="none">
+                <line x1="50" y1="0" x2="50" y2="75" />
+                <line x1="50" y1="20" x2="15" y2="60" />
+                <line id="arm-r" x1="50" y1="20" x2="85" y2="60" />
+                <line x1="50" y1="75" x2="20" y2="135" />
+                <line x1="50" y1="75" x2="80" y2="135" />
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Covers the whole screen (fixed), played when leaving the camera step -->
+      <div id="flash"></div>
     </section>
 
     <script type="module" src="/src/main.ts"></script>
