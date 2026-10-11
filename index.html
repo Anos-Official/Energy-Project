@@ -13,9 +13,13 @@
     </main>
 
     <section id="presentation" class="hidden">
-      <div id="poster">
-        <img src="/poster.png" alt="Energy Poster" />
-      </div>
+        
+        <div id="poster">
+          <div class="poster-frame">
+            <img src="/poster.png" alt="Energy Poster" />
+            <div class="poster-dim"></div>
+          </div>
+        </div>
 
       <div id="visuals">
         <!-- The 3D cube lives on its own layer so it can slide on/off screen between steps.
@@ -33,7 +37,7 @@
 
         <!-- Step 1: big camera picture (the next click plays the white flash) -->
         <div class="step hidden camera-step" data-transition="flash">
-          <img class="camera" src="/camera.svg" alt="Camera" />
+          <img class="camera" src="/camera.png" alt="Camera" />
         </div>
 
         <!-- Step 2: rotating cube (empty step, the cube is on the #model layer) -->
@@ -44,9 +48,12 @@
           <h1 style="--i: 5">Electrostatic</h1>
         </div>
 
-        <!-- Step 4: pan to the lightning picture (TBD) -->
-        <div class="step hidden picture-step">
-          <img class="lightning" src="/lightning.svg" alt="Lightning" />
+        <!-- Step 4: highlight "Electrostatic energy is potential energy" on the poster (empty step) -->
+        <div class="step hidden" data-transition="pan"></div>
+
+        <!-- Step 5: poster zooms out, video plays -->
+        <div class="step hidden video-step">
+          <video id="video" src="/video.mp4" playsinline></video>
         </div>
 
         <!-- Step 5: persona brings the cube back (empty step, cube is on the #model layer) -->

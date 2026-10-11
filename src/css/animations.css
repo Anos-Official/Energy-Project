@@ -16,10 +16,10 @@
 }
 
 @keyframes flash {
-    0%   { opacity: 0; }
-    12%  { opacity: 1; }
-    35%  { opacity: 1; }
-    100% { opacity: 0; }
+    0%   { clip-path: circle(0 at var(--fx) var(--fy)); opacity: 1; }
+    15%  { clip-path: circle(150vmax at var(--fx) var(--fy)); opacity: 1; }
+    35%  { clip-path: circle(150vmax at var(--fx) var(--fy)); opacity: 1; }
+    100% { clip-path: circle(150vmax at var(--fx) var(--fy)); opacity: 0; }
 }
 
 @keyframes drop {

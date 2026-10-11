@@ -4,15 +4,19 @@ type Scene = {
   pos: Pos;
   mood?: "hop" | "shake" | "lean";
   face?: string;
-  // Extra moves after the scene starts (ms from the step change)
+
   moves?: { at: number; pos: Pos }[];
 };
+
+
+const FLASH_FACE = "face-flash.png";
+
+const FLASH_FACE_TIME = 2000;
 
 const scenes: Record<number, Scene> = {
   0: { pos: "corner" },
   1: { pos: "corner", mood: "hop" },
   2: { pos: "left", mood: "shake" },
-  // Walk up to the cube, then shove it off the right side of the screen
   3: {
     pos: "pushL",
     mood: "lean",
@@ -21,17 +25,17 @@ const scenes: Record<number, Scene> = {
       { at: 2100, pos: "corner" },
     ],
   },
-  4: { pos: "corner", mood: "hop" },
-  // Go off screen, then come back in with the cube
-  5: {
+  4: { pos: "corner" },
+  5: { pos: "corner", mood: "hop" },
+  6: {
     pos: "off",
     moves: [
       { at: 800, pos: "pullin" },
       { at: 2100, pos: "corner" },
     ],
   },
-  6: { pos: "corner" },
-  7: { pos: "corner", mood: "hop" },
+  7: { pos: "corner" },
+  8: { pos: "corner", mood: "hop" },
 };
 
 export function setupPersona() {
@@ -45,6 +49,11 @@ export function setupPersona() {
   let timer: number | undefined;
   let moveTimers: number[] = [];
 
+  let faceTimer: number | undefined;
+  let baseFace = face.src;
+  
+  new Image().src = import.meta.env.BASE_URL + FLASH_FACE;
+
   function play(scene: Scene, entrance: boolean) {
     clearTimeout(timer);
     moveTimers.forEach((t) => clearTimeout(t));
@@ -56,7 +65,10 @@ export function setupPersona() {
     void character!.offsetWidth;
 
     persona!.dataset.pos = scene.pos;
-    if (scene.face) face!.src = import.meta.env.BASE_URL + scene.face;
+    if (scene.face) {
+      face!.src = import.meta.env.BASE_URL + scene.face;
+      baseFace = face!.src;
+    }
     if (entrance) character!.classList.add("drop");
 
     timer = window.setTimeout(() => {
@@ -85,5 +97,13 @@ export function setupPersona() {
     const index = (event as CustomEvent<{ index: number }>).detail.index;
     const scene = scenes[index];
     if (scene) play(scene, false);
+  });
+
+  document.addEventListener("flash", () => {
+    clearTimeout(faceTimer);
+    face.src = import.meta.env.BASE_URL + FLASH_FACE;
+    faceTimer = window.setTimeout(() => {
+      face.src = baseFace;
+    }, FLASH_FACE_TIME);
   });
 }

@@ -9,6 +9,10 @@ export function setupSteps() {
   const steps = document.querySelectorAll<HTMLElement>(".step");
   const presentation = document.getElementById("presentation");
   const flash = document.getElementById("flash");
+  // Where the flash sits on the camera picture, as a fraction of its size.
+  // (0, 0) = top-left corner, (1, 1) = bottom-right. Tweak to match your image.
+  const FLASH_SPOT = { x: 0.4, y: 0.25 };
+  
   let current = 0;
   let busy = false;
   let spawned = false;
@@ -66,7 +70,16 @@ export function setupSteps() {
 
     // Flash: whole screen goes white, swap while it is fully white
     if (kind === "flash" && forward && flash) {
+
+      const camera = old.querySelector<HTMLElement>(".camera");
+      if (camera) {
+        const rect = camera.getBoundingClientRect();
+        flash.style.setProperty("--fx", `${rect.left + rect.width * FLASH_SPOT.x}px`);
+        flash.style.setProperty("--fy", `${rect.top + rect.height * FLASH_SPOT.y}px`);
+      }
+      
       flash.classList.remove("go");
+      document.dispatchEvent(new CustomEvent("flash"));
       void flash.offsetWidth;
       flash.classList.add("go");
       window.setTimeout(() => swap(index), 250);
