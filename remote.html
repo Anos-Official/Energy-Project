@@ -63,11 +63,15 @@
         const socket = io("https://energy-project-70zp.onrender.com");
 
         socket.on("connect", () => {
-            status.textContent = "Connected to presentation server";
+            status.textContent = "Connected — remote ready!";
         });
-
+        
         socket.on("disconnect", () => {
-            status.textContent = "Disconnected — reconnecting...";
+            status.textContent = "Connecting to presentation server...";
+        });
+        
+        socket.on("connect_error", () => {
+            status.textContent = "Server waking up or reconnecting...";
         });
 
         document.getElementById("previous").addEventListener("click", () => {
