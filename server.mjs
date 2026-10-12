@@ -6,9 +6,14 @@ import os from "node:os";
 
 const app = express();
 const httpServer = createServer(app);
-const io = new Server(httpServer);
+const io = new Server(httpServer, {
+    cors: {
+        origin: "https://Anos-Official.github.io",
+        methods: ["GET", "POST"]
+    }
+});
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.static("dist"));
 
