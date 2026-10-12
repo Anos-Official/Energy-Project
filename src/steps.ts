@@ -154,4 +154,11 @@ export function setupSteps() {
     if (dx < -50) next();
     if (dx > 50) prev();
   });
+
+  return {
+     next,
+     prev,
+     goTo,
+     getCurrentStep: () => current,
+   };
 }

@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Energy Project Remote</title>
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 24px;
+            min-height: 100vh;
+            background: #111318;
+            color: white;
+            font-family: system-ui, sans-serif;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        h1 { margin: 0; font-size: 1.6rem; }
+        #status { color: #aaa; }
+
+        button {
+            min-height: 76px;
+            border: 1px solid #444;
+            border-radius: 16px;
+            background: #242832;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            touch-action: manipulation;
+        }
+
+        button:active { background: #414858; }
+
+        .navigation {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Energy Project Remote</h1>
+    <p id="status">Connecting...</p>
+
+    <div class="navigation">
+        <button id="previous">← Previous</button>
+        <button id="next">Next →</button>
+    </div>
+
+    <div class="navigation">
+        <button id="open-capacitor">Open Supercapacitor</button>
+        <button id="close-capacitor">Close Supercapacitor</button>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const status = document.getElementById("status");
+        const socket = io();
+
+        socket.on("connect", () => {
+            status.textContent = "Connected to presentation server";
+        });
+
+        socket.on("disconnect", () => {
+            status.textContent = "Disconnected — reconnecting...";
+        });
+
+        document.getElementById("previous").addEventListener("click", () => {
+            socket.emit("remote:command", "previous");
+        });
+
+        document.getElementById("next").addEventListener("click", () => {
+            socket.emit("remote:command", "next");
+        });
+
+        document.getElementById("open-capacitor").addEventListener("click", () => {
+            socket.emit("remote:command", "supercapacitor:open");
+        });
+        
+        document.getElementById("close-capacitor").addEventListener("click", () => {
+            socket.emit("remote:command", "supercapacitor:close");
+        });
+    </script>
+</body>
+</html>

@@ -148,6 +148,18 @@ export function setupModel() {
   let progress = 0; // 0 = closed, 1 = fully opened
   let target = 0;
 
+  
+  // Remote-control commands use the existing animation.
+  document.addEventListener("remote:supercapacitor-open", () => {
+    if (container.dataset.cube !== "center") return;
+    target = 1;
+  });
+
+  document.addEventListener("remote:supercapacitor-close", () => {
+    if (container.dataset.cube !== "center") return;
+    target = 0;
+  });
+
   document.addEventListener("keydown", (event) => {
     if (container.dataset.cube !== "center") return;
     if (event.key === "ArrowUp") {
