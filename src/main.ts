@@ -14,7 +14,7 @@ setupPoster();
 
 import { io } from "socket.io-client";
 
-const socket = io();
+const socket = io("https://energy-project-70zp.onrender.com");
 
 
 socket.on("presentation:command", (command: string) => {
