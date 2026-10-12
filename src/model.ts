@@ -7,8 +7,7 @@ const cubeStates: Record<number, "center" | "off"> = {
   2: "center",
   3: "off",
   4: "off",
-  5: "off",
-  6: "center",
+  5: "center",
 };
 
 const R = 1.1; // cell radius

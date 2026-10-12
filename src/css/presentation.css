@@ -38,7 +38,7 @@
 #poster.zoomed .poster-frame {
     transform: translate(calc(50% - var(--zx)), calc(50% - var(--zy))) scale(var(--zoom, 2.2));
     transition-duration: 1.2s;
-    transition-delay: 1.4s;
+    transition-delay: var(--zdelay, 1.4s);
 }
 
 /* The highlight box: its huge shadow darkens everything else on the poster */
@@ -173,6 +173,11 @@
     text-align: center;
 }
 
+#visuals .step.still,
+#visuals .step.still h1 {
+    animation: none;
+}
+
 #visuals .electro-step[data-dir="back"] h1 {
     animation-delay: 0s;
 }
@@ -184,26 +189,53 @@
     object-fit: contain;
 }
 
-/* Two pictures compared */
-.compare-step {
-    flex-direction: row;
-    gap: 2rem;
-    padding: 2rem;
+/* Supercapacitors vs Batteries */
+.versus-step {
+    --u: clamp(44px, min(8vw, 12vh), 110px);
+    justify-content: flex-start;
+    padding-top: 1.5%;
     box-sizing: border-box;
 }
 
-.compare-step img {
-    flex: 1;
-    min-width: 0;
-    max-width: 45%;
-    max-height: 70%;
-    object-fit: contain;
+#visuals .versus-step {
+    --u: clamp(44px, min(8vw, 12vh), 110px);
+    justify-content: flex-start;
+    padding-top: 1.5%;
+    box-sizing: border-box;
 }
 
-.vs {
-    font-size: clamp(1.5rem, min(3vw, 6vh), 3rem);
-    font-weight: 700;
-    color: #8F8FA0;
+/* Same height as the referee (top: 55%) so all three line up */
+.mini-persona {
+    position: absolute;
+    top: 55%;
+    transform: translate(-50%, -50%);
+}
+
+.mini-persona.left  { left: 18%; }
+.mini-persona.right { left: 82%; }
+
+.mini-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: drop 1s ease-out 0.6s both;
+}
+
+.mini-body img {
+    width: calc(var(--u) * 1.5);
+    height: var(--u);
+    object-fit: cover;
+    background: #1b1b22;
+    border-radius: 14px;
+    border: 3px solid #E9E9EE;
+    display: block;
+}
+
+.mini-body svg {
+    display: block;
+    width: var(--u);
+    height: auto;
+    margin-top: -2px;
 }
 
 /* Thank you */
@@ -255,12 +287,66 @@
     background: #FFD23F;
 }
 
+/* Ontario recommendation */
+#visuals .rec-step {
+    --u: clamp(44px, min(8vw, 12vh), 110px);
+    gap: 4vh;
+}
+
+.rec-step h1 {
+    margin: 0;
+    font-size: clamp(2.5rem, min(7vw, 12vh), 6rem);
+    font-weight: 700;
+}
+
+.rec-row {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.rec-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    animation: rise-in 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    animation-delay: calc(var(--i) * 0.3s);
+}
+
+.rec-card img {
+    width: calc(var(--u) * 2);
+    height: calc(var(--u) * 1.4);
+    object-fit: cover;
+    background: #1b1b22;
+    border-radius: 14px;
+    border: 3px solid #E9E9EE;
+}
+
+/* Battery is bigger: it stays the main source */
+.rec-card.big img {
+    width: calc(var(--u) * 3);
+    height: calc(var(--u) * 2.1);
+}
+
+.rec-card span {
+    font-weight: 700;
+    font-size: clamp(0.9rem, min(1.8vw, 3vh), 1.6rem);
+    color: #8F8FA0;
+}
+
+.rec-plus {
+    font-size: clamp(2rem, min(5vw, 9vh), 4rem);
+    font-weight: 700;
+    color: #FFD23F;
+    animation: rise-in 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    animation-delay: calc(var(--i) * 0.3s);
+}
+
 /* Small and portrait screens */
 @media (max-width: 800px), (orientation: portrait) {
     #presentation { flex-direction: column; }
     #poster { flex: 0 0 40%; }
     #visuals { flex: 1; }
-    .compare-step { flex-direction: column; }
-    .compare-step img { max-width: 80%; max-height: 35%; }
     #persona { --reach: calc(9dvh + var(--u) * 0.45); }
 }

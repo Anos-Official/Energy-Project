@@ -20,6 +20,7 @@
 #persona[data-pos="center"] { left: 50%; top: 55%; }
 #persona[data-pos="left"]   { left: 15%; top: 72%; }
 #persona[data-pos="off"]    { left: calc(50% + var(--reach) + 110%); top: 55%; }
+#persona[data-pos="thanks"] { left: 50%; top: 78%; }
 
 /* Half the cube's on-screen width, plus a little so her hands touch its edge */
 #persona {
@@ -68,6 +69,7 @@
 }
 
 #character.lean { transform: rotate(12deg); }
+#character.leanL { transform: rotate(-12deg); }
 
 #character.drop  { animation: drop 1s ease-out; }
 #character.hop   { animation: hop 0.6s ease-out; }
@@ -91,6 +93,7 @@
 
 #arm-r { transform-origin: 50px 20px; }
 #arm-r.wave { animation: wave 0.5s ease-in-out 3; }
+#arm-r.wave-loop { animation: wave 0.5s ease-in-out infinite; }
 
 /* Arrow pointing at Gregory */
 #arrow {
@@ -117,5 +120,11 @@
     animation:
         arrow-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both,
         nudge 0.7s ease-in-out 0.6s infinite alternate;
+}
+
+/* Referee stripes */
+#persona.referee #body line {
+    stroke-dasharray: 9 9;
+    stroke-linecap: butt;
 }
 
