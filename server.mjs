@@ -8,7 +8,7 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors: {
-        origin: "https://Anos-Official.github.io",
+        origin: "https://anos-official.github.io",
         methods: ["GET", "POST"]
     }
 });
@@ -17,8 +17,8 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.static("dist"));
 
-app.get("/remote.html", (req, res) => {
-    res.sendFile(process.cwd() + "/remote.html");
+app.get("/public/remote.html", (req, res) => {
+    res.sendFile(process.cwd() + "/public/remote.html");
 });
 
 io.on("connection", (socket) => {
