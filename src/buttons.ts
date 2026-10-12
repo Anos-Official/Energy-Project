@@ -11,6 +11,6 @@ export function setupButtons() {
   });
 
   connectButton?.addEventListener("click", () => {
-    console.log("Connect clicked");
+    window.location.href = "https://anos-official.github.io/Energy-Project/remote.html";
   });
 }
